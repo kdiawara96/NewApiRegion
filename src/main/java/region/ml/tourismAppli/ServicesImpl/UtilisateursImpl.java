@@ -28,6 +28,7 @@ public class UtilisateursImpl implements UtilisateursService {
     public Utilisateurs create(Utilisateurs utilisateur) {
 
         //nous allons encripter le code de l'utilisateur
+
         utilisateur.setPassword(passwordEncoder().encode(utilisateur.getPassword()));
         return repo.save(utilisateur);
     }

@@ -1,12 +1,13 @@
 package region.ml.tourismAppli.Controllers;
 
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import region.ml.tourismAppli.Services.UtilisateursService;
 import region.ml.tourismAppli.modele.Utilisateurs;
-import region.ml.tourismAppli.others.MessageError;
+import region.ml.tourismAppli.others.Message;
 
 @RestController
 @RequestMapping("/utilisateurs")
@@ -32,12 +33,26 @@ public class UtilisateursController {
        Utilisateurs user = userService.login(utilisateur.getEmail(),utilisateur.getPassword());
 
        if (user!=null){
-           return MessageError.ErrorResponse("ok", HttpStatus.OK, user);
+           return Message.Response("ok", HttpStatus.OK, user);
        }
        else {
-           return MessageError.ErrorResponse("none", HttpStatus.OK, "E-mail ou mot de passe incorrecte");
+           return Message.Response("none", HttpStatus.OK, "E-mail ou mot de passe incorrecte");
        }
 
 
     }
+
+    @PostMapping("/create")
+    @ResponseBody
+    public ResponseEntity<Object> createUser(@RequestBody Utilisateurs utilisateurs){
+try {
+    Utilisateurs user = userService.create(utilisateurs);
+   return Message.Response("ok", HttpStatus.OK,user);
+}catch (Exception e){
+    return Message.Response("none", HttpStatus.OK,"Erreur d'insersion!");
+}
     }
+
+
+
+}
