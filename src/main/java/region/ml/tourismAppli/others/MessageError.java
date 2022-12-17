@@ -1,4 +1,4 @@
-package region.ml.tourismApi.others;
+package region.ml.tourismAppli.others;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

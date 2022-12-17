@@ -1,13 +1,15 @@
-package region.ml.tourismApi.modele;
+package region.ml.tourismAppli.modele;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
-@Entity(name = "region")
-@Table(name = "region")
+
+@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,12 +34,16 @@ public class Region {
     @Column(length = 50)
     private String langue;
 
+
+    //Une région concerne un et un seul pays
     @ManyToOne
     private Pays pays;
 
+    //une région peut avoir 0 ou plusieurs commentaires
+    @JsonIgnore
+    @OneToMany(mappedBy = "region")
+    private Collection<Commentaires> commentaire = new ArrayList<>();
 
-   // @OneToMany(mappedBy = "region")
- // private Collection<Population> population;
 
    
 }

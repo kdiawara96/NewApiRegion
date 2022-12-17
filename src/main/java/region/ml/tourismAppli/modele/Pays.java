@@ -1,14 +1,14 @@
-package region.ml.tourismApi.modele;
+package region.ml.tourismAppli.modele;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
-@Entity(name = "pays")
-@Table(name = "pays")
+@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +21,12 @@ public class Pays {
 
     @Column(name="nompays",length = 50,unique = true, nullable = false)
     private String nompays;
+
+    //Un pays peut avoir une ou plusieurs région
+    @OneToMany(mappedBy = "pays")
+    private Collection<Region> region = new ArrayList<>();
+
+
 
 
 
