@@ -28,7 +28,7 @@ public class Utilisateurs {
     @Column(name = "password")
     private String password;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "utilisateur")
     private Collection<Commentaires> commentaires = new ArrayList<>();
 

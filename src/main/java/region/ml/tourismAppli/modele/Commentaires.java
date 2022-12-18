@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Commentaires {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +17,7 @@ public class Commentaires {
 
     private String description;
 
-    private int like;
-
-
+    private int aime = 0;
 
 
    //Un commentaire est fait par un et un seul utilisateur
