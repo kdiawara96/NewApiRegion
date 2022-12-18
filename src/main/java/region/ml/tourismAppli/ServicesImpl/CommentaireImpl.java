@@ -37,7 +37,7 @@ public class CommentaireImpl implements CommentaireService {
 
         for (Commentaires comments: allComments){
             try {
-                if (comments.getRegion().getId().equals(region)){
+                if (comments.getRegion().getId().equals(region.getId())){
 
                     tabComments.add(comments);
                 }

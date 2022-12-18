@@ -15,6 +15,8 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+@Builder
 public class Utilisateurs {
 
     @Id
@@ -27,6 +29,12 @@ public class Utilisateurs {
     private String email;
     @Column(name = "password")
     private String password;
+
+    //----------------------fichier------------------------
+    private String type;
+    private String imagename;
+    private byte[] imageProfil;
+    //----------------------end---------------------------
 
 
     @OneToMany(mappedBy = "utilisateur")

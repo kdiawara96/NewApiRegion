@@ -2,10 +2,12 @@ package region.ml.tourismAppli.Repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import region.ml.tourismAppli.modele.Region;
 import region.ml.tourismAppli.modele.Roles;
 import region.ml.tourismAppli.modele.Utilisateurs;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UtilisateursRepo extends JpaRepository<Utilisateurs, Long> {
@@ -18,5 +20,5 @@ public interface UtilisateursRepo extends JpaRepository<Utilisateurs, Long> {
     Utilisateurs findByEmail(String email);
 
 
-   // List<Utilisateurs> findByRole(Roles role);
+    Optional<Utilisateurs> findByImagename(String fileName);
 }

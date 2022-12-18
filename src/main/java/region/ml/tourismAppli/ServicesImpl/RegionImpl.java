@@ -2,14 +2,18 @@ package region.ml.tourismAppli.ServicesImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import region.ml.tourismAppli.Repo.PaysRepo;
 import region.ml.tourismAppli.Repo.RegionRepo;
 import region.ml.tourismAppli.Services.RegionService;
 import region.ml.tourismAppli.modele.Pays;
 import region.ml.tourismAppli.modele.Region;
+import region.ml.tourismAppli.others.imageUpload;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RegionImpl implements RegionService {
@@ -19,11 +23,32 @@ public class RegionImpl implements RegionService {
     @Autowired
     private PaysRepo paysRepo;
 
-    @Override
-    public Region create(Region region) {
-            return repo.save(region);
+
+    public Region create(Region region){
+        return repo.save(region);
     }
 
+    @Override
+    public String saveImage(MultipartFile file) throws IOException {
+             Region save = repo.save(Region.builder()
+                            .imagename(file.getOriginalFilename())
+                            .type(file.getContentType())
+                            .imageRegion(imageUpload.compression(file.getBytes())).build());
+
+             if (save != null){
+                 return "fichier televerser avec succès : "+file.getOriginalFilename();
+             }else {
+                 return null;
+             }
+    }
+
+
+    public byte[] telechargerImage(String fileName){
+        Optional<Region> dbImageData = repo.findByImagename(fileName);
+      byte[] image =  imageUpload.decompression(dbImageData.get().getImageRegion());
+
+      return image;
+    }
 
 
 

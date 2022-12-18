@@ -22,9 +22,8 @@ public class Pays {
 
     @Column(name="nom",length = 50, unique = true, nullable = false)
     private String nom;
-
     //Un pays peut avoir une ou plusieurs région
-    @OneToMany(mappedBy = "pays")
+    @OneToMany(mappedBy = "pays", cascade = CascadeType.ALL)
     private Collection<Region> region = new ArrayList<>();
 
 

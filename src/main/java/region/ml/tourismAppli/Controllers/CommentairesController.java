@@ -17,7 +17,7 @@ public class CommentairesController {
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<Object> createComments(Commentaires comments){
+    public ResponseEntity<Object> createComments(@RequestBody Commentaires comments){
 
         try {
             return Message.Response("ok", HttpStatus.OK, commentaireService.create(comments));
@@ -26,7 +26,7 @@ public class CommentairesController {
         }
     }
 
-    @PostMapping("/readCommentsByRegion/{id}")
+    @GetMapping("/readCommentsByRegion/{id}")
     @ResponseBody
     public ResponseEntity<Object> readCommentsByRegion(@PathVariable Long id){
         try {
