@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface PaysRepo extends JpaRepository<Pays,Long> {
 
     Pays findByNom(String nom);
+
 }

@@ -9,20 +9,21 @@ import java.util.List;
 
 public interface RegionService {
 
-   // Region create(Region region);
 
     Region create(Region region);
 
     Pays getById(Long id);
 
+    List<Region> readRegionByCountry(Long id);
 
-    List<Region> readRegionByCountry(Pays pays);
+
+
+
+
 
     Region update(Region region);
 
     String delete(Long id);
 
 
-
-    //List<Region> readRegionByCountry(Pays pays, Long id);
 }

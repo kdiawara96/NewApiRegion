@@ -12,6 +12,8 @@ import region.ml.tourismAppli.modele.Pays;
 import region.ml.tourismAppli.modele.Region;
 import region.ml.tourismAppli.others.Message;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/region")
 public class RegionController {
@@ -19,7 +21,6 @@ public class RegionController {
     @Autowired
     private RegionService service;
 
-    private PaysServices p;
 
 
     @PostMapping("/create")
@@ -34,21 +35,17 @@ public class RegionController {
     }
 
 
-
-
-
-
-
-
-
-
-    @GetMapping("/readRegionByCountry")
-    public ResponseEntity<Object> readRegionByCountry(@RequestBody Pays pays){
+   @GetMapping("/readRegionByCountry/{id}")
+    public ResponseEntity<Object> readRegionByCountry(@PathVariable Long id){
         try {
-            return Message.Response("ok", HttpStatus.OK,service.readRegionByCountry(pays));
+            return Message.Response("ok", HttpStatus.OK, service.readRegionByCountry(id));
         }catch (Exception e){
             return Message.Response("none", HttpStatus.BAD_REQUEST,"Error to listing");
         }
 
     }
+
+
+
+
 }
