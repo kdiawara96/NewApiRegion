@@ -22,10 +22,13 @@ public class Roles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@Enumerated(EnumType.ORDINAL)
-    private Role role;
+    //@Enumerated(EnumType.STRING)
+    private String role;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
-    List<Utilisateurs> utilisateur = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "UserRole", joinColumns = {
+            @JoinColumn(name = "id_role") }, inverseJoinColumns = {
+            @JoinColumn(name = "id_utilisateur") })
+   private Collection<Utilisateurs> utilisateur = new ArrayList<>();
 }

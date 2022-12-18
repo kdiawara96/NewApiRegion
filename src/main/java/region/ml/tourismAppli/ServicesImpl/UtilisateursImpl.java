@@ -4,11 +4,16 @@ package region.ml.tourismAppli.ServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import region.ml.tourismAppli.Repo.RolesRepo;
 import region.ml.tourismAppli.Repo.UtilisateursRepo;
 import region.ml.tourismAppli.Services.UtilisateursService;
 import region.ml.tourismAppli.modele.Roles;
 import region.ml.tourismAppli.modele.Utilisateurs;
 import region.ml.tourismAppli.others.Role;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UtilisateursImpl implements UtilisateursService {
@@ -19,6 +24,9 @@ public class UtilisateursImpl implements UtilisateursService {
     @Autowired
     private PasswordEncoder encoder;
 
+    @Autowired
+    private RolesRepo rRepo;
+
     //nous allons créer cette methode pour pouvoir encoder les mots de passes
 
 
@@ -28,6 +36,21 @@ public class UtilisateursImpl implements UtilisateursService {
         //nous allons encripter le code de l'utilisateur
         utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
 
+
+        Roles role = new Roles();
+        role.setRole("U");
+
+        //Create role
+        rRepo.save(role);
+
+        //Collection<String> list = new ArrayList<>();
+
+        //role.setUtilisateur(utilisateur);
+
+
+        List<Roles> roles = new ArrayList<>();
+          roles.add(role);
+        utilisateur.setRole(roles);
         return repo.save(utilisateur);
     }
 
