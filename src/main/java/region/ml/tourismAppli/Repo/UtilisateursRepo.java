@@ -18,5 +18,5 @@ public interface UtilisateursRepo extends JpaRepository<Utilisateurs, Long> {
     Utilisateurs findByEmail(String email);
 
 
-    List<Utilisateurs> findByRoles(Roles role);
+   // List<Utilisateurs> findByRole(Roles role);
 }

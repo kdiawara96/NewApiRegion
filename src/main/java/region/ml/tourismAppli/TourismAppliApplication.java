@@ -13,6 +13,10 @@ public class TourismAppliApplication {
 		SpringApplication.run(TourismAppliApplication.class, args);
 	}
 
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
 
 
 }

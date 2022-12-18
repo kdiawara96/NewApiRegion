@@ -19,8 +19,8 @@ public class Pays {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="nompays",length = 50,unique = true, nullable = false)
-    private String nompays;
+    @Column(name="nom",length = 50, unique = true, nullable = false)
+    private String nom;
 
     //Un pays peut avoir une ou plusieurs région
     @OneToMany(mappedBy = "pays")

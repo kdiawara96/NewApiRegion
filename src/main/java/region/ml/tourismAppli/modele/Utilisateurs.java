@@ -2,6 +2,7 @@ package region.ml.tourismAppli.modele;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import region.ml.tourismAppli.others.Role;
 
 import javax.persistence.*;
 
@@ -22,15 +23,17 @@ public class Utilisateurs {
 
     @Column(name = "username", nullable = false)
     private String username;
+    @Column(name = "email", nullable = false)
     private String email;
+    @Column(name = "password")
     private String password;
 
-   @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "utilisateur")
     private Collection<Commentaires> commentaires = new ArrayList<>();
 
 
-    @ManyToMany(mappedBy = "utilisateurs",fetch = FetchType.EAGER)
-    private Set<Roles> roles = new HashSet<>();
+    @ManyToOne
+    private Roles role;
 
 }
