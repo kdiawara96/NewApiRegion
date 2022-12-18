@@ -21,17 +21,17 @@ public class Region {
 
     private Long id;
 
-    @Column(name="nomregion",length = 25,unique = true)
+    @Column(length = 25,unique = true, nullable = false)
     private String nomregion;
 
-    @Column( name="codereegion",length = 10, unique = true, nullable = false)
+    @Column(length = 10, unique = true, nullable = false)
     private String coderegion;
 
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String domaineactivite;
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String superficie;
-    @Column(length = 50)
+    @Column(length = 50,nullable = false)
     private String langue;
 
 

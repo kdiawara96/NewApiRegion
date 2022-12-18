@@ -36,7 +36,7 @@ public class UtilisateursController {
            return Message.Response("ok", HttpStatus.OK, user);
        }
        else {
-           return Message.Response("none", HttpStatus.OK, "E-mail ou mot de passe incorrecte");
+           return Message.Response("none", HttpStatus.BAD_REQUEST, "E-mail ou mot de passe incorrecte");
        }
 
 
@@ -49,7 +49,7 @@ try {
     Utilisateurs user = userService.create(utilisateurs);
    return Message.Response("ok", HttpStatus.OK,user);
 }catch (Exception e){
-    return Message.Response("none", HttpStatus.OK,"Erreur d'insersion!");
+    return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur d'insersion!");
 }
     }
 
