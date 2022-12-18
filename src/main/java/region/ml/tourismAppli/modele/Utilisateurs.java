@@ -33,7 +33,10 @@ public class Utilisateurs {
     private Collection<Commentaires> commentaires = new ArrayList<>();
 
 
-    @ManyToOne
-    private Roles role;
+    @ManyToMany
+    @JoinTable(name = "UserRole", joinColumns = {
+            @JoinColumn(name = "id_utilisateur") }, inverseJoinColumns = {
+            @JoinColumn(name = "id_role") })
+    private Collection<Roles> role = new ArrayList<>();
 
 }
