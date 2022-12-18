@@ -1,15 +1,19 @@
 package region.ml.tourismAppli.ServicesImpl;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import region.ml.tourismAppli.Repo.RolesRepo;
 import region.ml.tourismAppli.Repo.UtilisateursRepo;
 import region.ml.tourismAppli.Services.UtilisateursService;
+import region.ml.tourismAppli.modele.Roles;
 import region.ml.tourismAppli.modele.Utilisateurs;
+import region.ml.tourismAppli.others.Role;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UtilisateursImpl implements UtilisateursService {
@@ -17,19 +21,36 @@ public class UtilisateursImpl implements UtilisateursService {
     @Autowired
     private UtilisateursRepo repo;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
+    @Autowired
+    private RolesRepo rRepo;
 
     //nous allons créer cette methode pour pouvoir encoder les mots de passes
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+
 
     @Override
     public Utilisateurs create(Utilisateurs utilisateur) {
 
         //nous allons encripter le code de l'utilisateur
+        utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
 
-        utilisateur.setPassword(passwordEncoder().encode(utilisateur.getPassword()));
+
+        Roles role = new Roles();
+        role.setRole("U");
+
+        //Create role
+        rRepo.save(role);
+
+        //Collection<String> list = new ArrayList<>();
+
+        //role.setUtilisateur(utilisateur);
+
+
+        List<Roles> roles = new ArrayList<>();
+          roles.add(role);
+        utilisateur.setRole(roles);
         return repo.save(utilisateur);
     }
 
@@ -39,7 +60,7 @@ public class UtilisateursImpl implements UtilisateursService {
         Utilisateurs user = this.getById(utilisateur.getId());
          System.out.println("Le password de l'utilisateur"+user.getPassword());
          //Nous redonnons les même rôle que le user avait
-        utilisateur.setRoles(user.getRoles());
+        utilisateur.setRole(user.getRole());
 
         //Au cas ou l'utilisateur ne modifie pas son mot de passe nous allons répasser le mot de pass
         //Existant
@@ -53,7 +74,7 @@ public class UtilisateursImpl implements UtilisateursService {
 
             System.out.println("Mot de passe non null");
 
-            utilisateur.setPassword(passwordEncoder().encode(utilisateur.getPassword()));
+            utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
 
         }
 
@@ -77,7 +98,8 @@ public class UtilisateursImpl implements UtilisateursService {
 
             //passwordEncoder().matches prend le mot de passe cripter dans la base et le mot de passe entrant
             //u.getPassword()
-            if (passwordEncoder().matches(password, utilisateur.getPassword()) ) {
+
+            if (encoder.matches(password, utilisateur.getPassword()) ) {
                 //avec utilisateur nous pouvons recuperer tous ses données
                 return utilisateur;
             } else

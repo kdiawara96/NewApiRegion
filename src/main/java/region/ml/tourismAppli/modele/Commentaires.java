@@ -17,7 +17,7 @@ public class Commentaires {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "description")
+    @Column(name = "description", unique = true)
     private String description;
 
     private int like = 0;

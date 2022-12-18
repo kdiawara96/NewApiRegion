@@ -1,15 +1,16 @@
 package region.ml.tourismAppli.modele;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import region.ml.tourismAppli.others.Role;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,9 +22,13 @@ public class Roles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.ORDINAL)
-    private region.ml.tourismAppli.others.Roles role;
+    //@Enumerated(EnumType.STRING)
+    private String role;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Utilisateurs> utilisateurs = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "UserRole", joinColumns = {
+            @JoinColumn(name = "id_role") }, inverseJoinColumns = {
+            @JoinColumn(name = "id_utilisateur") })
+   private Collection<Utilisateurs> utilisateur = new ArrayList<>();
 }

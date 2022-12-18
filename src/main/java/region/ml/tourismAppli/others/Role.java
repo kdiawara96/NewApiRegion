@@ -1,6 +1,6 @@
 package region.ml.tourismAppli.others;
 
-public enum Roles {
+public enum Role {
     A,
     U
 }

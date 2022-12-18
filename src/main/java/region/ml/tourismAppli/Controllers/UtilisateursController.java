@@ -43,14 +43,13 @@ public class UtilisateursController {
     }
 
     @PostMapping("/create")
-    @ResponseBody
     public ResponseEntity<Object> createUser(@RequestBody Utilisateurs utilisateurs){
-try {
-    Utilisateurs user = userService.create(utilisateurs);
-   return Message.Response("ok", HttpStatus.OK,user);
-}catch (Exception e){
-    return Message.Response("none", HttpStatus.OK,"Erreur d'insersion!");
-}
+        try {
+            Utilisateurs user = userService.create(utilisateurs);
+           return Message.Response("ok", HttpStatus.OK, user);
+        }catch (Exception e){
+            return Message.Response("none", HttpStatus.OK,"Erreur d'insersion!");
+        }
     }
 
 

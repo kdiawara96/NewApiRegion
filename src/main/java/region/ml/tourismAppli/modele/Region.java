@@ -40,7 +40,6 @@ public class Region {
     private Pays pays;
 
     //une région peut avoir 0 ou plusieurs commentaires
-    @JsonIgnore
     @OneToMany(mappedBy = "region")
     private Collection<Commentaires> commentaire = new ArrayList<>();
 
