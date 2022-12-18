@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import region.ml.tourismAppli.Repo.PaysRepo;
 import region.ml.tourismAppli.Services.PaysServices;
 import region.ml.tourismAppli.modele.Pays;
+import region.ml.tourismAppli.modele.Utilisateurs;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public class PaysImpl implements PaysServices {
     public List<Pays> readCountry(Pays pays) {
         return repo.findAll();
     }
+
+
+
 }

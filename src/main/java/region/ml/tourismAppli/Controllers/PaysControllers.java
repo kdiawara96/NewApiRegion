@@ -26,7 +26,7 @@ public class PaysControllers {
         try {
             return Message.Response("ok",HttpStatus.OK, paysService.creat(pays));
         }catch (Exception e){
-            return Message.Response("none", HttpStatus.OK,"Erreur de creation de pays!");
+            return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur de creation de pays!");
         }
 
     }
