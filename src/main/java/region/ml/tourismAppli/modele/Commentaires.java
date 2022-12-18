@@ -5,9 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 
-
 @Entity
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,12 +13,14 @@ import javax.persistence.*;
 public class Commentaires {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "description", unique = true)
     private String description;
 
-    private int like = 0;
+    private int like;
+
+
 
 
    //Un commentaire est fait par un et un seul utilisateur
@@ -30,4 +30,12 @@ public class Commentaires {
     //un commentaire concerne une et une seule région
     @ManyToOne
     private Region region;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

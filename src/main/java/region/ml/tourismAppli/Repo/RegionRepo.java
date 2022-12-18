@@ -15,5 +15,5 @@ public interface RegionRepo extends JpaRepository<Region, Long> {
   //  public Optional<Region> findById(Long id);
     Region findByCoderegion(String codeRegion);
 
-    List<Region> findByPays(Pays pays);
+    List<Region> findByPays(Long id);
  }
