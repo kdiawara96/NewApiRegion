@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import region.ml.tourismAppli.Repo.PaysRepo;
 import region.ml.tourismAppli.Services.PaysServices;
 import region.ml.tourismAppli.modele.Pays;
 import region.ml.tourismAppli.others.Message;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pays")
@@ -18,7 +21,8 @@ public class PaysControllers {
 
     @Autowired
     private PaysServices paysService;
-
+    @Autowired
+    private PaysRepo paysRepo;
     @PostMapping("/create")
     @ResponseBody
     public ResponseEntity<Object> create(@RequestBody Pays pays){
@@ -29,5 +33,10 @@ public class PaysControllers {
             return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur de creation de pays!");
         }
 
+    }
+
+    @GetMapping("/lire")
+    public List<Pays> lire(){
+        return paysRepo.findAll();
     }
 }

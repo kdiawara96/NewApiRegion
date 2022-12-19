@@ -12,9 +12,8 @@ import java.util.Optional;
 @Repository
 public interface RegionRepo extends JpaRepository<Region, Long> {
 
-  //  public Optional<Region> findById(Long id);
     Region findByCoderegion(String codeRegion);
 
     List<Region> findByPays(Long id);
-    Optional<Region> findByImagename(String fileName);
+
  }

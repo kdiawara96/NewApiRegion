@@ -1,5 +1,6 @@
 package region.ml.tourismAppli.modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Population {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="habitant",length = 12, nullable = false)
@@ -21,6 +23,7 @@ public class Population {
     private String annee;
 
     //Une population concerne une et une seule région
+    @JsonIgnore
     @ManyToOne
     private Region region;
 

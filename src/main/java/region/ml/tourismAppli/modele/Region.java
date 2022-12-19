@@ -14,7 +14,6 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Builder
 public class Region {
 
     @Id
@@ -35,19 +34,17 @@ public class Region {
     @Column(length = 50,nullable = false)
     private String langue;
 
-    //----------------------fichier------------------------
-    private String type;
-    private String imagename;
-    private byte[] imageRegion;
-    //----------------------end---------------------------
-
     //Une région concerne un et un seul pays
+    @JoinColumn(name = "idPays")
     @ManyToOne
     private Pays pays;
 
     //une région peut avoir 0 ou plusieurs commentaires
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL )
     private Collection<Commentaires> commentaire = new ArrayList<>();
+
+    @OneToOne
+    private Images image;
 
 
    

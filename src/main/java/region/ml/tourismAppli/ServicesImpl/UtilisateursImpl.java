@@ -4,6 +4,7 @@ package region.ml.tourismAppli.ServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import region.ml.tourismAppli.Repo.RolesRepo;
 import region.ml.tourismAppli.Repo.UtilisateursRepo;
 import region.ml.tourismAppli.Services.UtilisateursService;

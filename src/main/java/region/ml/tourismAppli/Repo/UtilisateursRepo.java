@@ -20,5 +20,5 @@ public interface UtilisateursRepo extends JpaRepository<Utilisateurs, Long> {
     Utilisateurs findByEmail(String email);
 
 
-    Optional<Utilisateurs> findByImagename(String fileName);
+    //Optional<Utilisateurs> findByImagename(String fileName);
 }

@@ -30,13 +30,6 @@ public class Utilisateurs {
     @Column(name = "password")
     private String password;
 
-    //----------------------fichier------------------------
-    private String type;
-    private String imagename;
-    private byte[] imageProfil;
-    //----------------------end---------------------------
-
-
     @OneToMany(mappedBy = "utilisateur")
     private Collection<Commentaires> commentaires = new ArrayList<>();
 
@@ -46,5 +39,8 @@ public class Utilisateurs {
             @JoinColumn(name = "id_utilisateur") }, inverseJoinColumns = {
             @JoinColumn(name = "id_role") })
     private Collection<Roles> role = new ArrayList<>();
+
+    @OneToOne
+    private Images image;
 
 }

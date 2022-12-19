@@ -12,11 +12,9 @@ import java.util.List;
 public interface RegionService {
 
 
-
-    String saveImage(MultipartFile file) throws IOException;
+    Pays getById(Long id);
 
     Region create(Region region);
-    Pays getById(Long id);
 
     List<Region> readRegionByCountry(Long id);
 
