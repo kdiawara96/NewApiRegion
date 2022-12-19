@@ -34,6 +34,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<!-- pour le cryptage de mots de passe -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
