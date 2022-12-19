@@ -23,7 +23,8 @@ public class Images {
     //----------------------fichier------------------------
     private String type;
     private String imagename;
-    @Column(name="image", length =1000)
+    @Lob @Basic(fetch = FetchType.LAZY)
+    @Column(name="image", length =100000)
     private byte[] image;
     //----------------------end---------------------------
 

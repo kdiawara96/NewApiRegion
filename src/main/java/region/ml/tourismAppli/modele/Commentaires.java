@@ -22,12 +22,12 @@ public class Commentaires {
 
 
    //Un commentaire est fait par un et un seul utilisateur
-    @JsonIgnore
+
     @ManyToOne
     private Utilisateurs utilisateur;
 
     //un commentaire concerne une et une seule région
-    @JsonIgnore
+
     @ManyToOne
     private Region region;
 

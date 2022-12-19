@@ -26,7 +26,7 @@ public class CommentaireImpl implements CommentaireService {
     }
 
 
-    @Override
+/*    @Override
     public List<Commentaires> readCommentaireByRegion(Long id) {
 
         Region region = getById(id);
@@ -48,8 +48,17 @@ public class CommentaireImpl implements CommentaireService {
         }
 
         return tabComments;
-    }
+    }*/
 
+    @Override
+    public List<Commentaires> readCommentaireByRegion(Long id) {
+
+       Region region = regionRepo.findById(id).get();
+
+        List<Commentaires> allCommentaires = repo.findAllByRegion_Id(region.getId());
+
+        return allCommentaires;
+    }
 
     @Override
     public Region getById(Long id) {

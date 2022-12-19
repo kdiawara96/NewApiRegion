@@ -24,6 +24,7 @@ public class Pays {
     private String nom;
 
     //Un pays peut avoir une ou plusieurs région
+    @JsonIgnore
     @OneToMany(mappedBy = "pays", cascade = CascadeType.ALL)
     private Collection<Region> region = new ArrayList<>();
 

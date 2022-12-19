@@ -43,7 +43,7 @@ public class RegionController {
     }
 
 
-  /*  @GetMapping("/readRegionByCountry/{id}")
+    @GetMapping("/readRegionByCountry/{id}")
     public ResponseEntity<Object> readRegionByCountry(@PathVariable Long id){
         try {
             return Message.Response("ok", HttpStatus.OK, service.readRegionByCountry(id));
@@ -51,15 +51,15 @@ public class RegionController {
             return Message.Response("none", HttpStatus.BAD_REQUEST,"Error to listing");
         }
 
-    }*/
+    }
 
 
-    @GetMapping("/readRegionByCountry/{id}")
+ /*   @GetMapping("/readRegionByCountry/{id}")
     public List<Region> readRegionByCountry(@PathVariable("id") Long id){
 
        return service.readRegionByCountry(id);
     }
-
+*/
     @GetMapping("/readRegionByCountry")
     public List<Region> readReg(){
     System.out.println("rrrrrrrrrrrrrrrrrrrrrtyghjgh");

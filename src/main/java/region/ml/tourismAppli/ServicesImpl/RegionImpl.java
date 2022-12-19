@@ -53,48 +53,10 @@ public class RegionImpl implements RegionService {
 
         Pays pays = paysRepo.findById(id).get();
 
-        List<Region> allRegion = repo.findAll();
+        List<Region> allRegion = repo.findAllByPays_Id(pays.getId());
 
-        /*System.err.println("-------------------------------------------------------");
-        System.err.println(allRegion);*/
-
-        //nous créons un tableau dynamique de Region qui va englober tout les regions du pays donner
-        List<Region> CartonRegions = new ArrayList<>();
-
-        //Nous allons itterer sur l'ensemble des region (allRegion)
-        for (Region region : allRegion) {
-
-            System.err.println("------------------------------------------------------------------------");
-            System.err.println("--------------"+pays.getId()+"---------------");
-            System.err.println("--------------"+region.getPays().getId()+"---------------");
-            try {
-                //Nous allons prendre chaque region et verifier si le id du pays = au id du pays dans la region
-                //et si ces true nous allons l'ajouter dans le tableau et au final renvoyer le tableau
-                if (region.getPays().getId().equals(pays.getId())) {
-
-                    System.err.println("------------------------------------------------------------------------");
-
-                    System.err.println("--------------La taille = "+CartonRegions.size()+"---------------");
-
-                    CartonRegions.add(region);
-
-
-                    System.err.println("--------------"+ CartonRegions.get(0).getNomregion()+"---------------");
-
-                }
-
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-
-        }
-
-        //la liste des régions par rapport a un pays donner
-        return CartonRegions;
-        //return repo.findByPays(pays.getId());
+        return allRegion;
     }
-
-
 //---------------------------------------------------------------------------
 
 
