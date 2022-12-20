@@ -117,4 +117,10 @@ public class UtilisateursImpl implements UtilisateursService {
     public Utilisateurs getById(Long id) {
         return repo.findById(id).get();
     }
+
+//Nous avons besoin dans la classe SecurityConfiguartion
+    @Override
+    public Utilisateurs readByEmail(String email) {
+        return repo.findByEmail(email);
+    }
 }
