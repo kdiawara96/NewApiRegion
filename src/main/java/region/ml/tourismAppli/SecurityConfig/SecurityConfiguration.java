@@ -5,9 +5,7 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -42,9 +39,8 @@ import java.util.Collection;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)//pour spécifier les role dans le controller il faut cette annotation dans le security config
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
+
 public class SecurityConfiguration {
 
     //Nous allons injecter ces attributs et declarer dans le constructeur
@@ -54,8 +50,15 @@ public class SecurityConfiguration {
 
     private UtilisateursService utilisateursService;
 
+    public SecurityConfiguration(RsakeysConfig rsakeysConfig_, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService, UtilisateursService utilisateursService) {
+        this.rsakeysConfig_ = rsakeysConfig_;
+        this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
+        this.utilisateursService = utilisateursService;
+    }
 
 
+    @Bean
     public AuthenticationManager authenticationManager(){
         var authProvider = new DaoAuthenticationProvider();
 
@@ -97,19 +100,20 @@ public class SecurityConfiguration {
                 .csrf(csrf->csrf.disable())
                 //Il donner l'autorisation au user à s'authentifier à travers ce url
                 .authorizeRequests(auth->auth.antMatchers("/authentification/**").permitAll())
-                .authorizeRequests(auth-> {
+               /*.authorizeRequests(auth-> {
                             try {
-                                auth.anyRequest().authenticated()
-                                        .and()
-                                        .oauth2Login();
+                                //auth.anyRequest().authenticated()
+                                      //  .and()
+                                       // .oauth2Login();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
-                )
+                )*/
                 .formLogin().and()
 
                 //.sessionManagement(sess->sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
 
 

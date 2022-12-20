@@ -3,6 +3,8 @@ package region.ml.tourismAppli.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import region.ml.tourismAppli.Services.CommentaireService;
 import region.ml.tourismAppli.modele.Commentaires;
@@ -17,7 +19,8 @@ public class CommentairesController {
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<Object> createComments(@RequestBody Commentaires comments){
+   // @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
+    public ResponseEntity<Object> createComments( @RequestBody Commentaires comments){
 
         try {
             return Message.Response("ok", HttpStatus.OK, commentaireService.create(comments));
@@ -28,7 +31,8 @@ public class CommentairesController {
 
     @GetMapping("/readCommentsByRegion/{id}")
     @ResponseBody
-    public ResponseEntity<Object> readCommentsByRegion(@PathVariable Long id){
+   // @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
+    public ResponseEntity<Object> readCommentsByRegion( @PathVariable Long id){
         try {
             return Message.Response("ok", HttpStatus.OK, commentaireService.readCommentaireByRegion(id));
         }catch (Exception e){

@@ -1,8 +1,6 @@
 package region.ml.tourismAppli.Controllers;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,26 +22,28 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@Data
+
 public class AuthController {
 
     //Pour generer un token à l'auth nous devons injecter jwt encoder
+
     private JwtEncoder jwtEncoder;
 
     private JwtDecoder jwtDecoder;
 
     //Pour faire l'auth j'ai besoin d'utiliser ceci
-
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     private UserDetailsService userDetailsService;
 
-/*    public AuthController(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder, AuthenticationManager authenticationManager, UserDetailsService userDetailsService){
+
+  public AuthController(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder, AuthenticationManager authenticationManager, UserDetailsService userDetailsService){
         this.jwtEncoder = jwtEncoder;
         this.jwtDecoder = jwtDecoder;
-        this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
-    }*/
+       this.authenticationManager = authenticationManager;
+       this.userDetailsService = userDetailsService;
+    }
 
 
     @PostMapping("/authentification")
@@ -63,7 +63,7 @@ public class AuthController {
 
     public ResponseEntity<Map<String, String>> jwtToken(
             String grantType,
-            String username,
+            String email,
             String password,
             boolean withRefreshToken,
             String refreshToken
@@ -77,8 +77,10 @@ public class AuthController {
 
         if (grantType.equals("password")){
 
+            System.err.println("------------"+email+"---------------------"+password);
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
+
+                    new UsernamePasswordAuthenticationToken(email, password)
 
             );
 

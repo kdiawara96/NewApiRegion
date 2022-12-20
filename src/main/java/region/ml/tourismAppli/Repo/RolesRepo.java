@@ -6,4 +6,6 @@ import region.ml.tourismAppli.modele.Roles;
 
 @Repository
 public interface RolesRepo extends JpaRepository<Roles,Long> {
+
+    Roles findByRole (String role);
 }

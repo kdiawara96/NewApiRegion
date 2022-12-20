@@ -12,9 +12,7 @@ import region.ml.tourismAppli.modele.Roles;
 import region.ml.tourismAppli.modele.Utilisateurs;
 import region.ml.tourismAppli.others.Role;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UtilisateursImpl implements UtilisateursService {
@@ -38,20 +36,24 @@ public class UtilisateursImpl implements UtilisateursService {
         utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
 
 
-        Roles role = new Roles();
-        role.setRole("U");
+        //Nous donnons le role USER à chaque personne voulant s'inscrire
+        String role = "USER";
+        Roles roles = rRepo.findByRole(role);
+        Set<Roles> rolee = new HashSet<>();
+        rolee.add(roles);
+        utilisateur.setRole(rolee);
 
+      /* Roles role = new Roles();
+        role.setRole("U");
         //Create role
         rRepo.save(role);
-
         //Collection<String> list = new ArrayList<>();
-
         //role.setUtilisateur(utilisateur);
-
-
         List<Roles> roles = new ArrayList<>();
-          roles.add(role);
-        utilisateur.setRole(roles);
+        roles.add(role);
+        utilisateur.setRole(roles);*/
+
+
         return repo.save(utilisateur);
     }
 

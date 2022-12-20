@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import region.ml.tourismAppli.Repo.RegionRepo;
+import org.springframework.security.core.Authentication;
 import region.ml.tourismAppli.Services.ImagesService;
 import region.ml.tourismAppli.Services.PaysServices;
 import region.ml.tourismAppli.Services.RegionService;
@@ -33,7 +35,8 @@ public class RegionController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createRegion(@RequestBody Region region){
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    public ResponseEntity<Object> createRegion(Authentication auauthentication, @RequestBody Region region){
 
         try {
            return Message.Response("ok", HttpStatus.OK,service.create(region) );
@@ -44,7 +47,8 @@ public class RegionController {
 
 
     @GetMapping("/readRegionByCountry/{id}")
-    public ResponseEntity<Object> readRegionByCountry(@PathVariable Long id){
+    //@PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
+    public ResponseEntity<Object> readRegionByCountry( @PathVariable Long id){
         try {
             return Message.Response("ok", HttpStatus.OK, service.readRegionByCountry(id));
         }catch (Exception e){
@@ -60,11 +64,7 @@ public class RegionController {
        return service.readRegionByCountry(id);
     }
 */
-    @GetMapping("/readRegionByCountry")
-    public List<Region> readReg(){
-    System.out.println("rrrrrrrrrrrrrrrrrrrrrtyghjgh");
-        return regionRepo.findAll();
-    }
+
 
 
 }

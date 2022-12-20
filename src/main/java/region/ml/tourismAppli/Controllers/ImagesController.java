@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,14 +23,16 @@ public class ImagesController {
     private ImagesService service;
 
     @PostMapping
-    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public ResponseEntity<?> uploadImage(Authentication auauthentication, @RequestParam("image") MultipartFile file) throws IOException {
 
 
         return ResponseEntity.status(HttpStatus.OK).body(service.saveImage(file));
     }
 
     @GetMapping("/{fileName}")
-    public ResponseEntity<?> downloadImage(@PathVariable String fileName){
+    //@PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
+    public ResponseEntity<?> downloadImage( @PathVariable String fileName){
        byte[] image = service.downloadImage(fileName);
 
        return ResponseEntity.status(HttpStatus.OK)
