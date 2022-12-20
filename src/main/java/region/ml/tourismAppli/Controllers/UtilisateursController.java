@@ -49,17 +49,27 @@ public class UtilisateursController {
 */
 
 
-    @PostMapping("/create")
-    //@PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication ,
-    public ResponseEntity<Object> createUser(@RequestBody Utilisateurs utilisateurs){
+/*    @PostMapping("/create")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public ResponseEntity<Object> createUser(Authentication auauthentication, @RequestBody Utilisateurs utilisateurs){
 
-try {
-    Utilisateurs user = userService.create(utilisateurs);
-   return Message.Response("ok", HttpStatus.OK,user);
-}catch (Exception e){
-    return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur d'insersion!");
+        try {
+            Utilisateurs user = userService.create(utilisateurs);
+           return Message.Response("ok", HttpStatus.OK,user);
+        }catch (Exception e){
+            return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur d'insersion!");
 }
+
+    }*/
+
+    @PostMapping("/create")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public Utilisateurs createUser(Authentication auauthentication, @RequestBody Utilisateurs utilisateurs){
+
+       return userService.create(utilisateurs);
+
 
     }
 
 }
+
