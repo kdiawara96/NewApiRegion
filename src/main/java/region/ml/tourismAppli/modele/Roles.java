@@ -25,7 +25,7 @@ public class Roles {
     //@Enumerated(EnumType.STRING)
     private String role;
 
-
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "UserRole", joinColumns = {
             @JoinColumn(name = "id_role") }, inverseJoinColumns = {

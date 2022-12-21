@@ -31,8 +31,8 @@ public class ImagesController {
     }
 
     @GetMapping("/{fileName}")
-    //@PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
-    public ResponseEntity<?> downloadImage( @PathVariable String fileName){
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public ResponseEntity<?> downloadImage( Authentication auauthentication, @PathVariable String fileName){
        byte[] image = service.downloadImage(fileName);
 
        return ResponseEntity.status(HttpStatus.OK)

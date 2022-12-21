@@ -27,8 +27,8 @@ public class PaysControllers {
     private PaysRepo paysRepo;
     @PostMapping("/create")
     @ResponseBody
-    //@PreAuthorize("hasAuthority('SCOPE_ADMIN')") Authentication auauthentication,
-    public ResponseEntity<Object> create( @RequestBody Pays pays){
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    public ResponseEntity<Object> create( Authentication auauthentication, @RequestBody Pays pays){
 
         try {
             return Message.Response("ok",HttpStatus.OK, paysService.creat(pays));
@@ -38,9 +38,9 @@ public class PaysControllers {
 
     }
 
-    @GetMapping("/lire")
-   // @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
-    public List<Pays> lire(){
+    @GetMapping("/read-all-country")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public List<Pays> lire(Authentication auauthentication){
         return paysRepo.findAll();
     }
 }

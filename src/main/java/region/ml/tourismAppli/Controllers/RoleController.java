@@ -19,9 +19,11 @@ public class RoleController {
 
 
     @PostMapping("/create_role")
-  //  @PreAuthorize("hasAuthority('SCOPE_ADMIN')") Authentication auauthentication,
-    public Roles createRole(@RequestBody Roles role){
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    public Roles createRole(Authentication auauthentication, @RequestBody Roles role){
         System.err.println(role);
         return service.addRole(role);
     }
+
+
 }

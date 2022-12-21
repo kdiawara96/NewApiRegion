@@ -49,7 +49,7 @@ public class UtilisateursController {
 */
 
 
-/*    @PostMapping("/create")
+ @PostMapping("/create")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
     public ResponseEntity<Object> createUser(Authentication auauthentication, @RequestBody Utilisateurs utilisateurs){
 
@@ -60,16 +60,16 @@ public class UtilisateursController {
             return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur d'insersion!");
 }
 
-    }*/
+    }
 
+/*
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
     public Utilisateurs createUser(Authentication auauthentication, @RequestBody Utilisateurs utilisateurs){
 
        return userService.create(utilisateurs);
-
-
     }
+*/
 
 }
 

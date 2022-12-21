@@ -19,8 +19,8 @@ public class CommentairesController {
 
     @PostMapping("/create")
     @ResponseBody
-   // @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
-    public ResponseEntity<Object> createComments( @RequestBody Commentaires comments){
+   @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public ResponseEntity<Object> createComments( Authentication auauthentication, @RequestBody Commentaires comments){
 
         try {
             return Message.Response("ok", HttpStatus.OK, commentaireService.create(comments));
@@ -31,8 +31,8 @@ public class CommentairesController {
 
     @GetMapping("/readCommentsByRegion/{id}")
     @ResponseBody
-   // @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
-    public ResponseEntity<Object> readCommentsByRegion( @PathVariable Long id){
+   @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public ResponseEntity<Object> readCommentsByRegion( Authentication auauthentication, @PathVariable Long id){
         try {
             return Message.Response("ok", HttpStatus.OK, commentaireService.readCommentaireByRegion(id));
         }catch (Exception e){

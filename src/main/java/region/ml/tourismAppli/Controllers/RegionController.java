@@ -47,8 +47,8 @@ public class RegionController {
 
 
     @GetMapping("/readRegionByCountry/{id}")
-    //@PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')") Authentication auauthentication,
-    public ResponseEntity<Object> readRegionByCountry( @PathVariable Long id){
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public ResponseEntity<Object> readRegionByCountry( Authentication auauthentication, @PathVariable Long id){
         try {
             return Message.Response("ok", HttpStatus.OK, service.readRegionByCountry(id));
         }catch (Exception e){
