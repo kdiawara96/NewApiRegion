@@ -4,6 +4,8 @@ import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import region.ml.tourismAppli.Services.UtilisateursService;
 import region.ml.tourismAppli.modele.Utilisateurs;
@@ -23,9 +25,12 @@ public class UtilisateursController {
     // Pour le login d'un utilisateur
     //Sawagger
    // @ApiOperation(value = "Pour le login d'un utilisateur.")
-    @PostMapping("/login")
+
+
+  /*  @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<Object> login(@RequestBody Utilisateurs utilisateur) {
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public ResponseEntity<Object> login(Authentication auauthentication , @RequestBody Utilisateurs utilisateur) {
 
         System.out.println(utilisateur.getEmail());
         System.out.println(utilisateur.getPassword());
@@ -41,17 +46,30 @@ public class UtilisateursController {
 
 
     }
+*/
 
-    @PostMapping("/create")
-    public ResponseEntity<Object> createUser(@RequestBody Utilisateurs utilisateurs){
 
-try {
-    Utilisateurs user = userService.create(utilisateurs);
-   return Message.Response("ok", HttpStatus.OK,user);
-}catch (Exception e){
-    return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur d'insersion!");
+ @PostMapping("/create")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public ResponseEntity<Object> createUser(Authentication auauthentication, @RequestBody Utilisateurs utilisateurs){
+
+        try {
+            Utilisateurs user = userService.create(utilisateurs);
+           return Message.Response("ok", HttpStatus.OK,user);
+        }catch (Exception e){
+            return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur d'insersion!");
 }
 
     }
 
+/*
+    @PostMapping("/create")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public Utilisateurs createUser(Authentication auauthentication, @RequestBody Utilisateurs utilisateurs){
+
+       return userService.create(utilisateurs);
+    }
+*/
+
 }
+

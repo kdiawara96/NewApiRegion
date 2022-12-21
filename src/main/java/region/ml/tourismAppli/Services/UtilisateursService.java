@@ -16,6 +16,8 @@ public interface UtilisateursService {
 
     String delete(Long id);
 
+    Utilisateurs readByEmail(String email);
+
 
 
 

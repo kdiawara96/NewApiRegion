@@ -3,6 +3,8 @@ package region.ml.tourismAppli.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import region.ml.tourismAppli.Repo.PaysRepo;
 import region.ml.tourismAppli.Services.PaysServices;
@@ -25,7 +27,8 @@ public class PaysControllers {
     private PaysRepo paysRepo;
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<Object> create(@RequestBody Pays pays){
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    public ResponseEntity<Object> create( Authentication auauthentication, @RequestBody Pays pays){
 
         try {
             return Message.Response("ok",HttpStatus.OK, paysService.creat(pays));
@@ -35,8 +38,9 @@ public class PaysControllers {
 
     }
 
-    @GetMapping("/lire")
-    public List<Pays> lire(){
+    @GetMapping("/read-all-country")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
+    public List<Pays> lire(Authentication auauthentication){
         return paysRepo.findAll();
     }
 }
