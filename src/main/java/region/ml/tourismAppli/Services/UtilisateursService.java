@@ -3,6 +3,8 @@ package region.ml.tourismAppli.Services;
 import org.springframework.web.multipart.MultipartFile;
 import region.ml.tourismAppli.modele.Utilisateurs;
 
+import java.util.List;
+
 
 public interface UtilisateursService {
 
@@ -17,6 +19,9 @@ public interface UtilisateursService {
     String delete(Long id);
 
     Utilisateurs readByEmail(String email);
+
+    List<Utilisateurs> readeAllUser();
+
 
 
 

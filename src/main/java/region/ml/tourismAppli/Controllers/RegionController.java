@@ -15,8 +15,10 @@ import org.springframework.security.core.Authentication;
 import region.ml.tourismAppli.Services.ImagesService;
 import region.ml.tourismAppli.Services.PaysServices;
 import region.ml.tourismAppli.Services.RegionService;
+import region.ml.tourismAppli.modele.Images;
 import region.ml.tourismAppli.modele.Pays;
 import region.ml.tourismAppli.modele.Region;
+import region.ml.tourismAppli.modele.Utilisateurs;
 import region.ml.tourismAppli.others.Message;
 
 import java.io.Console;
@@ -33,13 +35,28 @@ public class RegionController {
     @Autowired
     final private RegionRepo regionRepo;
 
+    @Autowired
+    private ImagesService imageService;
+
 
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
-    public ResponseEntity<Object> createRegion(Authentication auauthentication, @RequestBody Region region){
+    public ResponseEntity<Object> createRegion(Authentication auauthentication, @RequestParam("image") MultipartFile file, @RequestParam("data") String region){
+
+
 
         try {
-           return Message.Response("ok", HttpStatus.OK,service.create(region) );
+            Images img =  imageService.saveImage(file);
+
+            Region rgn = new Region();
+
+            rgn = new JsonMapper().readValue(region, Region.class);
+
+            rgn.setImage(img);
+
+            Region rg = service.create(rgn);
+
+           return Message.Response("ok", HttpStatus.OK,rg);
         }catch(Exception e){
             return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur d'insertion de region!");
         }

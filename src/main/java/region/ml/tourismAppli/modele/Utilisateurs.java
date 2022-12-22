@@ -34,7 +34,7 @@ public class Utilisateurs {
     private Collection<Commentaires> commentaires = new ArrayList<>();
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "UserRole", joinColumns = {
             @JoinColumn(name = "id_utilisateur") },
             inverseJoinColumns = {

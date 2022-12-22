@@ -25,8 +25,11 @@ public class Pays {
 
     //Un pays peut avoir une ou plusieurs région
     @JsonIgnore
-    @OneToMany(mappedBy = "pays", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pays", cascade = CascadeType.REMOVE)
     private Collection<Region> region = new ArrayList<>();
+
+    @OneToOne
+    private Images image;
 
 
 

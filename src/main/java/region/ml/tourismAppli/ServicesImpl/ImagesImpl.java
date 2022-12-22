@@ -22,20 +22,20 @@ public class ImagesImpl implements ImagesService {
     //Pour sauvegarder l'image
 
     @Override
-    public String saveImage(MultipartFile file) throws IOException {
+    public Images saveImage(MultipartFile file) throws IOException {
 
-        Images save = repo.save( Images.builder()
-                .imagename(file.getOriginalFilename())
-                .type(file.getContentType())
-                .image(imageUpload.compression(file.getBytes())).build()
+        try {
+            return repo.save( Images.builder()
+                    .imagename(file.getOriginalFilename())
+                    .type(file.getContentType())
+                    .image(imageUpload.compression(file.getBytes())).build()
 
-        );
-
-        if (save != null) {
-            return "fichier televerser avec succès : " + file.getOriginalFilename();
-        } else {
+            );
+        }catch (Exception e){
             return null;
         }
+
+
 
     }
 
