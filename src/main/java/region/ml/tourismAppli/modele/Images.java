@@ -1,5 +1,6 @@
 package region.ml.tourismAppli.modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 @Builder
-
 public class Images {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +28,18 @@ public class Images {
     private byte[] image;
     //----------------------end---------------------------
 
+    @JsonIgnore
     @OneToOne(mappedBy = "image")
     private Region region;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "image")
     private  Utilisateurs utilisateurs;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "image")
+    private Pays pays;
+
 
 
 

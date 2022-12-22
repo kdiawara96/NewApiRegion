@@ -21,4 +21,8 @@ public interface UtilisateursRepo extends JpaRepository<Utilisateurs, Long> {
 
 
     //Optional<Utilisateurs> findByImagename(String fileName);
+
+   // findAllAndAndImage
+        List<Utilisateurs> findAll();
+
 }

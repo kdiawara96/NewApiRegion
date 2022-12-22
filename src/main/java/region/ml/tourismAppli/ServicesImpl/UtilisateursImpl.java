@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import region.ml.tourismAppli.Repo.RolesRepo;
 import region.ml.tourismAppli.Repo.UtilisateursRepo;
+import region.ml.tourismAppli.SecurityConfig.SecurityConfiguration;
 import region.ml.tourismAppli.Services.UtilisateursService;
 import region.ml.tourismAppli.modele.Roles;
 import region.ml.tourismAppli.modele.Utilisateurs;
@@ -25,6 +26,9 @@ public class UtilisateursImpl implements UtilisateursService {
 
     @Autowired
     private RolesRepo rRepo;
+
+
+
 
     //nous allons créer cette methode pour pouvoir encoder les mots de passes
 
@@ -78,12 +82,36 @@ public class UtilisateursImpl implements UtilisateursService {
             System.out.println("Mot de passe non null");
 
             utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
-
         }
-
         return repo.save(utilisateur);
 
     }
+
+
+
+
+//Mise à jour des roles
+
+
+ /*   @Override
+    public Utilisateurs updateRole(Utilisateurs utilisateur) {
+
+        Utilisateurs user = this.getById(utilisateur.getId());
+
+        List<Roles> r = rRepo.findAll();
+
+        for (Roles role : r){
+           if(role.getRole().equals(utilisateur.getRole())) {
+               user.setRole(utilisateur.getRole());
+           }
+        }
+
+        return repo.save(user);
+
+    }*/
+
+
+
 
     @Override
     public String delete(Long id) {
@@ -124,5 +152,10 @@ public class UtilisateursImpl implements UtilisateursService {
     @Override
     public Utilisateurs readByEmail(String email) {
         return repo.findByEmail(email);
+    }
+
+    @Override
+    public List<Utilisateurs> readeAllUser() {
+        return repo.findAll();
     }
 }
