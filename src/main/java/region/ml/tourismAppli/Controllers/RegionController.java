@@ -7,22 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import region.ml.tourismAppli.Repo.RegionRepo;
 import org.springframework.security.core.Authentication;
 import region.ml.tourismAppli.Services.ImagesService;
-import region.ml.tourismAppli.Services.PaysServices;
 import region.ml.tourismAppli.Services.RegionService;
 import region.ml.tourismAppli.modele.Images;
-import region.ml.tourismAppli.modele.Pays;
 import region.ml.tourismAppli.modele.Region;
-import region.ml.tourismAppli.modele.Utilisateurs;
 import region.ml.tourismAppli.others.Message;
 
-import java.io.Console;
-import java.util.List;
 
 @AllArgsConstructor
 @Controller

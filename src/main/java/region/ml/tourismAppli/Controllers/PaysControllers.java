@@ -13,7 +13,6 @@ import region.ml.tourismAppli.Services.ImagesService;
 import region.ml.tourismAppli.Services.PaysServices;
 import region.ml.tourismAppli.modele.Images;
 import region.ml.tourismAppli.modele.Pays;
-import region.ml.tourismAppli.modele.Region;
 import region.ml.tourismAppli.others.Message;
 
 import java.util.List;
