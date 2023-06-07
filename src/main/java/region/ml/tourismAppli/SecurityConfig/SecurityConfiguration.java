@@ -36,6 +36,8 @@ import region.ml.tourismAppli.modele.Utilisateurs;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)//pour spécifier les role dans le controller il faut cette annotation dans le security config
@@ -98,20 +100,20 @@ public class SecurityConfiguration {
 
         return httpSecurity
                 //Pour eviter les attaques csrf
-                .csrf(csrf->csrf.disable())
+                .csrf(csrf -> csrf.disable())
                 //Il donner l'autorisation au user à s'authentifier à travers ce url
-                .authorizeRequests(auth->auth.antMatchers("/authentification/**").permitAll())
-               /*.authorizeRequests(auth-> {
-                            try {
-                                //auth.anyRequest().authenticated()
-                                      //  .and()
-                                       // .oauth2Login();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                )*/
-                .formLogin().and()
+                .authorizeRequests(auth -> auth.antMatchers("/authentification/**").permitAll())
+                /*.authorizeRequests(auth-> {
+                             try {
+                                 //auth.anyRequest().authenticated()
+                                       //  .and()
+                                        // .oauth2Login();
+                             } catch (Exception e) {
+                                 e.printStackTrace();
+                             }
+                         }
+                 )*/
+                .formLogin(withDefaults())
 
                 //.sessionManagement(sess->sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 

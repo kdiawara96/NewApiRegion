@@ -57,6 +57,8 @@ public class UtilisateursController {
             return Message.Response("none", HttpStatus.BAD_REQUEST,"Erreur d'insersion!");
         }
     }
+
+    
     @PutMapping("/update")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN') or hasAuthority('SCOPE_USER')")
     public ResponseEntity<Object> update(Authentication auauthentication, @RequestBody Utilisateurs utilisateurs){

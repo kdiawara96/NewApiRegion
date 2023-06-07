@@ -1,6 +1,5 @@
 package region.ml.tourismAppli.Controllers;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-
 public class AuthController {
 
     //Pour generer un token à l'auth nous devons injecter jwt encoder
@@ -55,7 +53,6 @@ public class AuthController {
     //(2) Parce que dans le auth basique ces spring qui le fait automatiquement (dans la requête http nous envoyons username et le role en mode base64 et spring securité va s'en charger de l'auth )nous pouvons utiliser l'autentification)
     //(2)  Mais maintenant c'est à nous de le faire au niveau du code
 
-
     // tout d'abord il faut souligner qu'il n'est pas récommander de créer un refresh token pour les
     //application web mais pour les application mobile
     //Nous allons créer un booléan
@@ -81,7 +78,6 @@ public class AuthController {
             Authentication authentication = authenticationManager.authenticate(
 
                     new UsernamePasswordAuthenticationToken(email, password)
-
             );
 
             subject= authentication.getName();
@@ -122,28 +118,15 @@ public class AuthController {
             scope = authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" "));
         }
 
-
         Map<String, String> idToken = new HashMap<>();
-
 
         //l'objet instance va nous permettre de capturer la date instante
         Instant instant = Instant.now();
 
-
-
-
-
         //Dans le jwt nous avons un ensemble de claim
-
         //Nous avons subject qui represente username et nous allons recuperer avec le authentication.getName
-
-
-
         //expirestAt va contenir la date d'expiration du token et nous spefissons la date d'expiration
-
-
-
-        // claim va contenir les autorisation
+        //claim va contenir les autorisation
 
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .subject(subject)
