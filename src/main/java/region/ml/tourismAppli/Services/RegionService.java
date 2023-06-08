@@ -18,11 +18,6 @@ public interface RegionService {
 
     List<Region> readRegionByCountry(Long id);
 
-
-
-
-
-
     Region update(Region region);
 
     String delete(Long id);

@@ -11,3 +11,31 @@ import java.security.interfaces.RSAPublicKey;
 //@ConfigurationPropertiesScan("rsa")
 public record RsakeysConfig(RSAPublicKey publicKey, RSAPrivateKey privateKey) {
 }
+
+
+//----------------------------------AUTRE MANIERE-----------------------------------
+
+/*
+ * @Configuration
+@ConfigurationProperties(prefix = "rsa")
+public class RsakeysConfig {
+    private RSAPublicKey publicKey;
+    private RSAPrivateKey privateKey;
+
+    public RSAPublicKey getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(RSAPublicKey publicKey) {
+        this.publicKey = publicKey;
+    }
+
+    public RSAPrivateKey getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(RSAPrivateKey privateKey) {
+        this.privateKey = privateKey;
+    }
+}
+ */

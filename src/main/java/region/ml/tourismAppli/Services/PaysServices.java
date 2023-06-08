@@ -2,7 +2,6 @@ package region.ml.tourismAppli.Services;
 
 
 import region.ml.tourismAppli.modele.Pays;
-import region.ml.tourismAppli.modele.Utilisateurs;
 
 import java.util.List;
 
